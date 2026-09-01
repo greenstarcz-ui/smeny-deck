@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Směny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{
+  --paper:#f5f4f1; --panel:#fffefc; --line:#dedbd4; --line2:#eceae5;
+  --ink:#1b1e24; --ink2:#464c55; --muted:#858b93;
+  --accent:#1b5a8a; --accent-soft:#dde9f2;
+  --fact:#3f6b52; --fact-bg:#e4ede7;
+  --est:#8a6a1f; --est-bg:#f3ecdb;
+  --unk:#6a6f78; --unk-bg:#e9e9ea;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#14161a; --panel:#1b1e23; --line:#2f343c; --line2:#252a31;
+    --ink:#eceae5; --ink2:#b9bec6; --muted:#878d96;
+    --accent:#5f9cc9; --accent-soft:#1a2833;
+    --fact:#7fb497; --fact-bg:#1d2a23;
+    --est:#c6a154; --est-bg:#2b2519;
+    --unk:#969ba3; --unk-bg:#24272c;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14161a; --panel:#1b1e23; --line:#2f343c; --line2:#252a31;
+  --ink:#eceae5; --ink2:#b9bec6; --muted:#878d96;
+  --accent:#5f9cc9; --accent-soft:#1a2833;
+  --fact:#7fb497; --fact-bg:#1d2a23;
+  --est:#c6a154; --est-bg:#2b2519;
+  --unk:#969ba3; --unk-bg:#24272c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'IBM Plex Serif',Georgia,serif; font-size:16.5px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  -webkit-user-select:none; user-select:none;
+}
+.wrap{max-width:940px; margin:0 auto; padding:0 clamp(20px,5vw,48px)}
+h1,h2,h3,.ui{font-family:'IBM Plex Sans',system-ui,sans-serif}
+.num{font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums}
+
+header{padding:72px 0 40px; border-bottom:2px solid var(--ink)}
+.brandline{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap}
+h1{font-size:40px; font-weight:700; letter-spacing:-.01em}
+.brandline .sub{font-family:'IBM Plex Sans'; font-size:16px; color:var(--ink2)}
+header .meta{
+  font-family:'IBM Plex Mono'; font-size:12px; color:var(--muted);
+  letter-spacing:.04em; margin-top:22px; display:flex; gap:20px; flex-wrap:wrap;
+}
+.summary{margin-top:26px; font-size:18.5px; line-height:1.55; max-width:64ch}
+
+.legend{display:flex; gap:10px; flex-wrap:wrap; margin-top:26px}
+.tag{
+  font-family:'IBM Plex Sans'; font-size:11.5px; font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; padding:3px 9px; border-radius:3px; white-space:nowrap;
+}
+.tag.f{background:var(--fact-bg); color:var(--fact)}
+.tag.e{background:var(--est-bg); color:var(--est)}
+.tag.u{background:var(--unk-bg); color:var(--unk)}
+.legend span.note{font-family:'IBM Plex Sans'; font-size:13px; color:var(--muted); align-self:center}
+
+section{padding:52px 0; border-bottom:1px solid var(--line)}
+.shead{display:flex; gap:16px; align-items:baseline; margin-bottom:26px}
+.snum{font-family:'IBM Plex Mono'; font-size:13px; color:var(--accent); font-weight:600; padding-top:5px}
+h2{font-size:26px; font-weight:600; letter-spacing:-.01em; text-wrap:balance}
+h3{font-family:'IBM Plex Sans'; font-size:15px; font-weight:600; margin:28px 0 12px; letter-spacing:.01em}
+p{max-width:68ch; margin-bottom:14px; color:var(--ink2)}
+p strong,li strong{color:var(--ink); font-weight:600}
+ul{margin:0 0 14px 20px; max-width:68ch; color:var(--ink2)}
+li{margin-bottom:7px}
+a{color:var(--accent)}
+
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:4px; background:var(--panel); margin:18px 0}
+table{border-collapse:collapse; width:100%; font-family:'IBM Plex Sans'; font-size:14.5px; min-width:520px}
+th{
+  font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted);
+  font-weight:600; text-align:left; padding:11px 16px; border-bottom:1px solid var(--line); background:var(--paper);
+}
+td{padding:11px 16px; border-bottom:1px solid var(--line2); color:var(--ink2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{color:var(--ink); font-weight:500}
+
+.flow{
+  font-family:'IBM Plex Mono'; font-size:14px; line-height:1.9;
+  background:var(--panel); border:1px solid var(--line); border-radius:4px;
+  padding:18px 22px; margin:18px 0; overflow-x:auto; white-space:pre; color:var(--ink2);
+}
+.callout{
+  border-left:3px solid var(--accent); background:var(--accent-soft);
+  padding:14px 18px; border-radius:0 4px 4px 0; margin:18px 0; max-width:68ch;
+}
+.callout p{margin:0; color:var(--ink)}
+.warn{border-left-color:var(--est); background:var(--est-bg)}
+
+/* защита: вотермарка + печать */
+.wm{
+  position:fixed; inset:0; pointer-events:none; z-index:9;
+  background-image:repeating-linear-gradient(-35deg, transparent 0 180px, rgba(128,128,128,.035) 180px 260px);
+}
+.wm::after{
+  content:"DŮVĚRNÉ · pouze k prezentaci"; position:fixed; right:14px; bottom:10px;
+  font-family:'IBM Plex Mono'; font-size:11px; color:var(--muted); opacity:.7;
+}
+@media print{ body>*{display:none !important} body::before{
+  content:"Tento dokument není určen k tisku."; font-family:sans-serif; display:block; padding:40px;
+}}
+footer{padding:40px 0 80px; font-family:'IBM Plex Mono'; font-size:12px; color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wm"></div>
+<div class="wrap">
+
+<header>
+  <div class="brandline">
+    <h1>Směny</h1>
+    <span class="sub">рабочее название · платформа смен с кураторским слоем · Чехия</span>
+  </div>
+  <div class="meta"><span>вер. 2026-09-01</span><span>статус: дизайн завершён, старт разработки</span><span>не оферта, не питч — рабочий разбор</span></div>
+  <p class="summary">Биржа рабочих смен для ЧР, в которой впервые оцифрован реальный слой рынка — <strong>кураторы</strong>: люди, которые приводят агентурам бригады и получают кроны с каждого отработанного часа своих людей.</p>
+  <div class="legend">
+    <span class="tag f">Факт</span><span class="tag e">Оценка</span><span class="tag u">Неизвестно</span>
+    <span class="note">каждый блок помечен степенью уверенности</span>
+  </div>
+</header>
+
+<section>
+  <div class="shead"><span class="snum">01</span><h2>Как рынок работает сейчас</h2></div>
+  <div class="flow">Завод ──► Агентура práce ──► Работник
+              │
+              └──► Куратор: ~10–15 Kč за каждый час каждого своего человека</div>
+  <p><span class="tag f">Факт</span> Заводы и склады набирают персонал через agentury práce. Агентуры сами людей почти не находят — их приводят кураторы: «свои люди» в украинской, узбекской, киргизской общинах. Куратор получает от агентуры вознаграждение с каждого отработанного часа приведённых работников.</p>
+  <p><span class="tag e">Оценка</span> Весь этот слой живёт в WhatsApp, Excel и частично в наличке. Куратор не видит, сколько реально отработали его люди; агентура путается в расчётах; работники ждут выплат неделями.</p>
+  <p><span class="tag f">Факт</span> Крупнейший цифровой игрок — Tymbe (DPP онлайн, выплата после смены). Кураторского слоя у Tymbe нет: модель построена на прямой связке «работник — фирма».</p>
+  <div class="callout"><p>Ниша: продукта для кураторов не существует, при этом именно кураторы контролируют поток людей на рынке. <span class="tag e">Оценка</span></p></div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">02</span><h2>Продукт: четыре роли</h2></div>
+  <div class="tw"><table>
+    <tr><th>Роль</th><th>Что получает</th></tr>
+    <tr><td>Куратор<br><span class="num" style="font-size:12px;color:var(--muted)">mobile</span></td>
+        <td>Бригада в аппе вместо WhatsApp-хаоса: инвайт по ссылке/QR, планёрка «кто едет завтра», замены в два тапа. Живой счётчик заработка: часы каждого человека × ставка, прогноз месяца.</td></tr>
+    <tr><td>Работник<br><span class="num" style="font-size:12px;color:var(--muted)">mobile · RU/UK/CS</span></td>
+        <td>Смены рядом с фильтрами, чек-ин на месте, честный счётчик часов и денег. Контроль лимитов DPP (300 ч / 12 000 Kč на работодателя) — до штрафа, а не после. Выплата в тот же день после подтверждения часов.</td></tr>
+    <tr><td>Агентура<br><span class="num" style="font-size:12px;color:var(--muted)">web</span></td>
+        <td>Poptávky в пул кураторов, docházka, автоматический расчёт работникам и кураторам, экспорт в mzdy, генерация faktur заводу из подтверждённых часов. Compliance-щит: документы, лимиты, аудит-след для инспекции.</td></tr>
+    <tr><td>Завод<br><span class="num" style="font-size:12px;color:var(--muted)">лёгкая роль, фаза 2</span></td>
+        <td>Мастер подтверждает часы с телефона; SOS-смены «трое не пришли — трое нужны к 14:00».</td></tr>
+  </table></div>
+  <p><span class="tag f">Факт</span> Ставки раздельные и закрытые: работник не видит цену завода, куратор не видит чужих договорённостей, агентуры не видят друг друга. Вознаграждение куратора идёт только из маржи агентуры — из зарплаты работника не удерживается ничего (§ 58 zák. 435/2004 это прямо запрещает).</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">03</span><h2>Правовая конструкция</h2></div>
+  <div class="tw"><table>
+    <tr><th>Этаж</th><th>Статус</th><th>Основание</th></tr>
+    <tr><td>Агентура — работодатель</td><td>povolení forma b), кауция 1 млн Kč — уже есть у партнёра</td><td class="num">§ 14/1 b) zák. 435/2004</td></tr>
+    <tr><td>Платформа — софт (пилот)</td><td>SaaS + доска, деньги мимо нас, povolení не требуется</td><td class="num">—</td></tr>
+    <tr><td>Платформа — рекрутинг (масштаб)</td><td>povolení forma a): без кауции, бессрочно</td><td class="num">§ 14/1 a)</td></tr>
+    <tr><td>Куратор</td><td>koordinátor náboru на DPP/DPČ — сотрудник, не «поставщик людей»</td><td class="num">zákoník práce</td></tr>
+  </table></div>
+  <p><span class="tag f">Факт</span> Кураторский заработок как переменная зарплата координатора — легален. Опасная альтернатива, которой мы не касаемся: куратор «сдаёт людей» сам = zastřené zprostředkování, штрафы до 10 млн Kč, приоритет контроля SUIP.</p>
+  <p><span class="tag f">Факт</span> Копии трудовых документов обязаны находиться на рабочем месте (§ 136, штраф до 500 тыс. Kč). Приложение даёт работнику QR-карточку: подписанный DPP + dočasné přidělení на экране — электронная копия для контроля.</p>
+  <p><span class="tag f">Факт</span> Лимиты DPP 2026: 300 ч/год и 12 000 Kč/мес у одного работодателя; несколько DPP у разных работодателей легальны. Платформа следит за лимитами автоматически.</p>
+  <p><span class="tag e">Оценка</span> Пилотная аудитория — люди со свободным доступом на рынок труда (ЕС, dočasná ochrana, trvalý pobyt). Держатели zaměstnaneckých karet — отдельная фаза после проверки правил.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">04</span><h2>Деньги: гарантированная выплата</h2></div>
+  <div class="flow">Агентура префандит кошелёк (PSP-субаккаунт)
+   │  нет префанда → смены не публикуются
+   ▼
+Часы подтверждены ──► выплата работнику в тот же день
+   │
+   └──► кураторские посчитаны автоматически, без споров</div>
+  <p><span class="tag f">Факт</span> Деньги проходят через лицензированного платёжного провайдера (модель Stripe Connect / Mangopay) — юридически всегда деньги агентуры, платформа их не держит и лицензию ČNB не требует.</p>
+  <p><span class="tag f">Факт</span> «Выплата сразу» как платная опция — обкатанный чешский рынок EWA: PalmApp (49 Kč/транзакция, инвестор Česká spořitelna), Advanto. Стандартная выплата в цикле агентуры — всегда бесплатна.</p>
+  <p><span class="tag f">Факт</span> Кассовый разрыв агентур (завод платит фактуру 30–60 дней) закрывается факторингом: Roger (лицензия ČNB) финансирует 70–90 % фактуры за 1–3 дня, ~1,9 % стоимости. Платформа генерит фактуры из подтверждённых часов — верифицированная pohledávka для партнёра.</p>
+  <p><span class="tag e">Оценка</span> Замкнутый цикл «завод должен → факторинг профинансировал → люди получили сегодня» — главный продающий аргумент против рынка, который жёстко задерживает выплаты.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">05</span><h2>Модель платформы</h2></div>
+  <div class="tw"><table>
+    <tr><th>Источник</th><th>Механика</th><th>Когда</th></tr>
+    <tr><td>Агентуры</td><td>кроны за каждый отработанный через платформу час</td><td>с пилота</td></tr>
+    <tr><td>Работники</td><td>опция instant-выплаты / подписка Plus (EWA-модель)</td><td>v1</td></tr>
+    <tr><td>Факторинг</td><td>referral-комиссия партнёра за профинансированные фактуры</td><td>фаза 2</td></tr>
+  </table></div>
+  <p><span class="tag e">Оценка</span> Сетевой эффект: кураторы — пул платформы. Каждая новая агентура приходит на уже живой пул бригад; каждый куратор приводит работников сам. Доступ к работе всегда бесплатен — платные опции только вокруг удобства денег и данных (§ 58).</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">06</span><h2>Статус и план</h2></div>
+  <div class="tw"><table>
+    <tr><th>Этап</th><th>Содержание</th><th>Статус</th></tr>
+    <tr><td class="num">E0–E1</td><td>фундамент: мультитенант-БД, логины, бригады, инвайты</td><td>в работе</td></tr>
+    <tr><td class="num">E2–E3</td><td>poptávky, планёрка, чек-ин, расчёт часов и крон → демо</td><td>—</td></tr>
+    <tr><td class="num">E4–E5</td><td>деньги через PSP, документы, QR-карточка, BOZP</td><td>—</td></tr>
+    <tr><td class="num">E6–E8</td><td>нотификации, полировка, пилот с живой агентурой</td><td>—</td></tr>
+  </table></div>
+  <p><span class="tag f">Факт</span> Пилотная агентура с povolení есть. KPI пилота (8 недель): ≥2 активных куратора, ≥30 работников, ≥60 % часов агентуры через платформу, ноль споров по кураторским.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">07</span><h2>Что ещё не решено</h2></div>
+  <ul>
+    <li><span class="tag u">Неизвестно</span> Название и домен.</li>
+    <li><span class="tag u">Неизвестно</span> Точная escrow-конструкция PSP (Stripe Connect vs Mangopay) для чешского флоу.</li>
+    <li><span class="tag u">Неизвестно</span> Юридически валидный способ онлайн-подписи DPP (исследуем практику Tymbe).</li>
+    <li><span class="tag u">Неизвестно</span> Реальные ставки и объёмы пилотной агентуры — интервью впереди.</li>
+    <li><span class="tag u">Неизвестно</span> Правила для держателей zaměstnaneckých karet (фаза 2).</li>
+  </ul>
+  <div class="callout warn"><p>Это рабочий документ с фактами и открытыми вопросами, а не инвестиционное предложение. Правовые утверждения проверены по открытым источникам 09/2026 и подлежат подтверждению юристом перед запуском.</p></div>
+</section>
+
+<footer>směny · важное — по меткам · показ разовый, распространение не предполагается</footer>
+</div>
+<script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey||e.metaKey) && ['s','p','c','u'].includes(e.key.toLowerCase())) e.preventDefault();
+});
+</script>
+</body>
+</html>
